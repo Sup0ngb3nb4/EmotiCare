@@ -1,44 +1,52 @@
-// import React, { TouchableOpacity, View } from "react-native";
-// import { styles } from "./Styles";
-// import TabButton from "../../atoms/tabButton/Index";
-// import { useState } from "react";
+import React, { Image, TouchableOpacity, View } from "react-native";
+import { styles } from "./Styles";
+import TabButton from "../../atoms/tabButton/Index";
+import { useState } from "react";
 
-// import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import Happy from "./Happy";
+import Sad from "./Sad";
 
-// const HomeScreen = () => {
-//     const { navigation } = props;
-//   const [selectedOption, setSelectedOption] = useState("Sad");
-//   const dispatch = useDispatch();
-//   const { error } = useSelector((state) => state.AuthReducer);
+const HomeScreen = ({navigation}) => {
+  const [selectedOption, setSelectedOption] = useState("Sad");
+  const dispatch = useDispatch();
 
-//   const handleSignup = () => {
-//     switch (selectedOption) {
-//       case "Happy":
-//         dispatch({ type: selectedOption });
-//         break;
-//       case "Sad":
-//         dispatch({ type: selectedOption });
-//         break;
-//     }
-//   };
-//   return (
-//     <View style={styles.container}>
-//       <View style={styles.tabContainer}>
-//         <TabButton
-//           source={require("../../../../assets/happy.jpeg")}
-//           text="Happy"
-//           active={selectedOption === "Happy"}
-//           onPress={() => setSelectedOption("Happy")}
-//         />
-//         <TabButton
-//           source={require("../../../../assets/sad.jpeg")}
-//           text="Sad"
-//           active={selectedOption === "Sad"}
-//           onPress={() => setSelectedOption("Sad")}
-//         />
-//       </View>
-//     </View>
-//   );
-// };
+  const handleSignup = () => {
+    switch (selectedOption) {
+      case "Happy":
+        dispatch({ type: selectedOption });
+        break;
+      case "Sad":
+        dispatch({ type: selectedOption });
+        break;
+    }
+  };
+  return (
+    <View style={styles.container}>
+      <Image
+        source={require("../../../../assets/counselling.png")}
+        style={styles.logo}
+      />
 
-// export default HomeScreen;
+      <View style={styles.tabContainer}>
+        <TabButton
+          source={require("../../../../assets/happy.png")}
+          text="Joyful"
+          active={selectedOption === "Happy"}
+          onPress={() => setSelectedOption("Happy")}
+        />
+        <TabButton
+          source={require("../../../../assets/sad.png")}
+          text="Upset"
+          active={selectedOption === "Sad"}
+          onPress={() => setSelectedOption("Sad")}
+        />
+      </View>
+
+      {selectedOption == "Happy" && <Happy navigation={navigation}/>}
+      {selectedOption == "Sad" && <Sad navigation={navigation}/>}
+    </View>
+  );
+};
+
+export default HomeScreen;

@@ -1,32 +1,68 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, SafeAreaView } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  SafeAreaView,
+  Alert,
+} from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { styles } from "./Styles";
 
-//Components
-import CustomDatePicker from "../../molecules/customDatePicker/Index";
+// Components
 import CustomInput from "../../molecules/customInput/Index";
 import PasswordInput from "../../molecules/passwordInput/Index";
 import CustomPicker from "../../molecules/customPicker/Index";
 
-//Icons
-import {
-  SimpleLineIcons,
-  Fontisto,
-  Foundation,
-  AntDesign,
-} from "@expo/vector-icons";
+// Icons
+import { SimpleLineIcons, Fontisto, Foundation } from "@expo/vector-icons";
+
+// API
+import api from "../../../api/api";
+import getEndPoint from "../../../endpoints/getEndpoint";
+import { storeTokens } from "../../../api/tokenManager";
 
 const SignUpScreen = ({ navigation }) => {
   const [focusedInput, setFocusedInput] = useState(null);
-  const [form, setForm] = React.useState({
+  const [form, setForm] = useState({
     userName: "",
-    dateOfBirth: "",
     gender: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
+
+  const handleSignUp = async () => {
+    if (form.password !== form.confirmPassword) {
+      Alert.alert("Error", "Passwords do not match");
+      return;
+    }
+
+    try {
+      const response = await api.post(getEndPoint("REGISTER"), {
+        username: form.userName,
+        email: form.email,
+        password: form.password,
+        gender: form.gender,
+      });
+      console.log(response);
+
+      if (response.status == 201) {
+        await storeTokens(response.data.access, response.data.refresh);
+        navigation.navigate("DrawerNavigator");
+      } else {
+        console.error("Invalid response format:", response);
+        Alert.alert("Error", "Registration failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error registering", error);
+      Alert.alert(
+        "Error",
+        "Registration failed. Please try again",
+        error.response?.data?.error || "Something went wrong"
+      );
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -37,7 +73,6 @@ const SignUpScreen = ({ navigation }) => {
         <Text style={styles.welcomeText}>Register to EmotiCare!</Text>
 
         <View style={styles.inputContainer}>
-
           {/* User Name */}
           <CustomInput
             icon={() => <SimpleLineIcons name="user" size={20} color="#999" />}
@@ -50,32 +85,19 @@ const SignUpScreen = ({ navigation }) => {
             isFocused={focusedInput === "userName"}
           />
 
-          {/* Date of Birth */}
-          <CustomDatePicker
-            icon={() => <AntDesign name="calendar" size={24} color="black" />}
-            placeholder="Date of Birth"
-            value={form.dateOfBirth}
-            onDateChange={(date) => setForm({ ...form, dateOfBirth: date })}
-            placeholderTextColor="#6b7280"
-            onFocus={() => setFocusedInput("dateOfBirth")}
-            onBlur={() => setFocusedInput(null)}
-            isFocused={focusedInput === "dateOfBirth"}
-          />
-
           {/* Gender */}
           <CustomPicker
-            placeholder="Gender"
+            value={form.gender}
+            onChangeValue={(gender) => setForm({ ...form, gender })}
             icon={() => (
               <Foundation name="male-female" size={20} color="#999" />
             )}
-            value={form.gender}
-            onFocus={() => setFocusedInput("gender")}
-            onBlur={() => setFocusedInput(null)}
-            isFocused={focusedInput === "gender"}
+            placeholder="Gender"
             data={[
               { label: "Male", value: "male" },
               { label: "Female", value: "female" },
             ]}
+            edit={true}
           />
 
           {/* Email */}
@@ -118,7 +140,7 @@ const SignUpScreen = ({ navigation }) => {
           />
         </View>
 
-        <TouchableOpacity style={styles.loginButton} >
+        <TouchableOpacity style={styles.loginButton} onPress={handleSignUp}>
           <Text style={styles.loginButtonText}>Sign Up</Text>
         </TouchableOpacity>
 

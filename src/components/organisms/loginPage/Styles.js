@@ -28,14 +28,14 @@ export const styles = StyleSheet.create({
   loginButton: {
     width: '100%',
     height: width * 0.15,
-    backgroundColor: '#FFF200',
+    backgroundColor: '#042630',
     borderRadius: width * 0.05,
     justifyContent: 'center',
     alignItems: 'center',
     marginVertical: width * 0.03,
   },
   loginButtonText: {
-    color: '#000000',
+    color: '#ffffff',
     fontSize: width * 0.05,
     fontWeight: 'bold',
   },
@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
     marginTop: width * 0.08
   },
   forgotPasswordText: {
-    color: '#6C63FF',
+    color: '#86b9b0',
     fontSize: width * 0.037,
     marginBottom: 20,
   },
@@ -54,7 +54,7 @@ export const styles = StyleSheet.create({
     fontSize: width * 0.037,
   },
   accountLink: {
-    color: '#6C63FF',
+    color: '#86b9b0',
     textDecorationLine: 'underline',
     fontSize: width * 0.037,
   },

@@ -1,6 +1,5 @@
 import { Dimensions, StyleSheet } from "react-native";
 import styled from "styled-components/native";
-import { Dimensions } from "react-native";
 
 const { width, height } = Dimensions.get("window");
 
@@ -9,7 +8,7 @@ export const StyledTabButton = styled.TouchableOpacity`
   alignItems: center;
   paddingVertical: ${height * 0.015}px;
   borderBottomWidth: 2px;
-  borderBottomColor: ${(props) => props.active? "#001F54" : "transparent"};
+  borderBottomColor: ${(props) => props.active? "#4c7273" : "transparent"};
 `;
 
 export const TabItemImage = styled.Image`

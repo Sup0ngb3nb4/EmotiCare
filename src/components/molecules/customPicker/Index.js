@@ -1,21 +1,16 @@
 import { Picker } from "@react-native-picker/picker";
 
-//Styled Components
+// Styled Components
 import { Container, IconContainer, TransparentBlock } from "./Styles";
 
-const isPlaceholder = (value) => {
-  return value == "";
-};
-
-const CustomPicker = ({ state, setState, data, icon, placeholder, edit }) => {
+const CustomPicker = ({ value, onChangeValue, data, icon, placeholder, edit }) => {
   return (
     <Container>
       <IconContainer>{icon()}</IconContainer>
       {edit === false && <TransparentBlock />}
       <Picker
-        selectedValue={state}
-        onValueChange={setState}
-        placeholder="Gender"
+        selectedValue={value}
+        onValueChange={onChangeValue}
       >
         <Picker.Item
           label={placeholder}
@@ -24,17 +19,15 @@ const CustomPicker = ({ state, setState, data, icon, placeholder, edit }) => {
           style={{ fontSize: 14 }}
         />
         {data &&
-          data.map(({ label, value }, index) => {
-            return (
-              <Picker.Item
-                key={index}
-                label={label}
-                value={value ? value : label}
-                style={{ fontSize: 14 }}
-                color={edit === false ? "#999" : "#000"}
-              />
-            );
-          })}
+          data.map(({ label, value }, index) => (
+            <Picker.Item
+              key={index}
+              label={label}
+              value={value || label}
+              style={{ fontSize: 14 }}
+              color={edit === false ? "#999" : "#000"}
+            />
+          ))}
       </Picker>
     </Container>
   );

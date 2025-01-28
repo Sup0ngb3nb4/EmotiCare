@@ -6,13 +6,53 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "top",
-    backgroundColor: "red",
+    padding: width * 0.05,
+    paddingTop: width * 0.2,
+    backgroundColor: "#fff"
+  },
+  logo: {
+    width: width * 0.6,
+    height: width * 0.6,
+    marginBottom: width * 0.08,
+    alignSelf: "center",
   },
   tabContainer: {
     flexDirection: "row",
     marginBottom: 20,
     display: "flex",
-    backgroundColor: "yellow",
+  },
+  happyContainer: {
+    marginTop: width * 0.1
+  },
+  happyButton: {
+    width: "100%",
+    height: width * 0.15,
+    backgroundColor: "#042630",
+    borderRadius: width * 0.05,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: width * 0.2,
+  },
+  happyButtonText:{
+    fontWeight: "900",
+    fontSize: width * 0.05,
+    color: "#ffffff",
+  },
+  sadContainer: {
+    marginTop: width * 0.1
+  },
+  sadButton: {
+    width: "100%",
+    height: width * 0.15,
+    backgroundColor: "#042630",
+    borderRadius: width * 0.05,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: width * 0.2,
+  },
+  sadButtonText:{
+    fontWeight: "900",
+    fontSize: width * 0.05,
+    color: "#ffffff",
   }
 });
