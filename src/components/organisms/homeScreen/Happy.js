@@ -1,14 +1,25 @@
 import React from "react";
-import { Text, View,TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
+import * as Animatable from "react-native-animatable";
+
+//Styles
 import { styles } from "./Styles";
 
-const Happy = ({navigation}) => {
+const Happy = ({ navigation }) => {
   return (
-    <View style={styles.happyContainer}>
-      <TouchableOpacity style={styles.happyButton} onPress={() => navigation.navigate("MiniGamesScreen")}>
+    <Animatable.View
+      animation="pulse"
+      iterationCount="infinite"
+      useNativeDriver
+      style={styles.happyContainer}
+    >
+      <TouchableOpacity
+        style={styles.happyButton}
+        onPress={() => navigation.navigate("MiniGamesScreen")}
+      >
         <Text style={styles.happyButtonText}>Happy Button</Text>
       </TouchableOpacity>
-    </View>
+    </Animatable.View>
   );
 };
 

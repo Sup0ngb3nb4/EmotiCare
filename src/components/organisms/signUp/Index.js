@@ -7,6 +7,8 @@ import {
   Alert,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import * as Animatable from "react-native-animatable";
+import Toast from "react-native-toast-message";
 import { styles } from "./Styles";
 
 // Components
@@ -19,7 +21,7 @@ import { SimpleLineIcons, Fontisto, Foundation } from "@expo/vector-icons";
 
 // API
 import api from "../../../api/api";
-import getEndPoint from "../../../endpoints/getEndpoint";
+import { getEndPoint } from "../../../endpoints/getEndpoint";
 import { storeTokens } from "../../../api/tokenManager";
 
 const SignUpScreen = ({ navigation }) => {
@@ -49,13 +51,28 @@ const SignUpScreen = ({ navigation }) => {
 
       if (response.status == 201) {
         await storeTokens(response.data.access, response.data.refresh);
+        Toast.show({
+          type: "success",
+          text1: "Successfully registered!",
+          visibilityTime: 3000,
+        });
         navigation.navigate("DrawerNavigator");
       } else {
         console.error("Invalid response format:", response);
+        Toast.show({
+          type: "error",
+          text1: "Signup Failed!",
+          text2: data.error || "Please try again.",
+        });
         Alert.alert("Error", "Registration failed. Please try again.");
       }
     } catch (error) {
       console.error("Error registering", error);
+      Toast.show({
+        type: "error",
+        text1: "Signup Failed!",
+        text2: "Something went wrong.",
+      });
       Alert.alert(
         "Error",
         "Registration failed. Please try again",
@@ -140,9 +157,16 @@ const SignUpScreen = ({ navigation }) => {
           />
         </View>
 
-        <TouchableOpacity style={styles.loginButton} onPress={handleSignUp}>
-          <Text style={styles.loginButtonText}>Sign Up</Text>
-        </TouchableOpacity>
+        <Animatable.View
+          animation="pulse"
+          iterationCount="infinite"
+          useNativeDriver
+          style={styles.loginButton}
+        >
+          <TouchableOpacity style={styles.loginButton} onPress={handleSignUp}>
+            <Text style={styles.loginButtonText}>Sign Up</Text>
+          </TouchableOpacity>
+        </Animatable.View>
 
         <View style={styles.footerContainer}>
           <TouchableOpacity>

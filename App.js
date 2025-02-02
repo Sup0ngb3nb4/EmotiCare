@@ -16,6 +16,7 @@ import AboutScreen from "./src/components/organisms/aboutScreen/Index";
 import DrawerNavigator from "./src/navigations/DrawerNavigator";
 import ChatScreen from "./src/components/organisms/chatScreen/Index";
 import MiniGamesScreen from "./src/components/organisms/miniGamesScreen/Index";
+import Toast from "react-native-toast-message";
 
 const Stack = createStackNavigator();
 
@@ -84,6 +85,7 @@ export default function App() {
             options={{ title: "Drawer Navigator" }}
           />
         </Stack.Navigator>
+        <Toast/>
       </NavigationContainer>
     </Provider>
   );

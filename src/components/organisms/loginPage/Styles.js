@@ -26,13 +26,14 @@ export const styles = StyleSheet.create({
     paddingVertical: width * 0.05
   },
   loginButton: {
-    width: '100%',
+    width: '96%',
     height: width * 0.15,
     backgroundColor: '#042630',
     borderRadius: width * 0.05,
     justifyContent: 'center',
     alignItems: 'center',
     marginVertical: width * 0.03,
+    marginHorizontal: width * 0.015,
   },
   loginButtonText: {
     color: '#ffffff',

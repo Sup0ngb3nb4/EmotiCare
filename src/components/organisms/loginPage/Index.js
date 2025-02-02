@@ -8,6 +8,8 @@ import {
   Alert,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import * as Animatable from "react-native-animatable";
+import Toast from "react-native-toast-message";
 import { styles } from "./Styles";
 
 // Components
@@ -30,7 +32,6 @@ const LoginScreen = ({ navigation }) => {
   });
 
   const handleLogin = async () => {
-    // Basic validation for email and password
     if (!form.email || !form.password) {
       Alert.alert("Error", "Please fill in both email and password.");
       return;
@@ -43,17 +44,32 @@ const LoginScreen = ({ navigation }) => {
       });
 
       if (response.status == 200) {
-        // Store the tokens in AsyncStorage
         await storeTokens(response.data.access, response.data.refresh);
-        // Navigate to the DrawerNavigator
+        Toast.show({
+          type: "success",
+          text1: "Successfully logged in!",
+          visibilityTime: 3000,
+        });
         navigation.navigate("DrawerNavigator");
       } else {
+        Toast.show({
+          type: "error",
+          text1: "Login Failed!",
+          text2: "Invalid credentials.",
+        });
         Alert.alert("Error", "Invalid email or password.");
       }
     } catch (error) {
-      // Handle API errors
       if (error.response && error.response.data) {
-        Alert.alert("Login Failed", error.response.data.detail || "An error occurred.");
+        Toast.show({
+          type: "error",
+          text1: "Login Failed!",
+          text2: "Something went wrong.",
+        });
+        Alert.alert(
+          "Login Failed",
+          error.response.data.detail || "An error occurred."
+        );
       } else {
         Alert.alert("Error", "Login failed. Please try again.");
       }
@@ -98,9 +114,16 @@ const LoginScreen = ({ navigation }) => {
           />
         </View>
 
-        <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-          <Text style={styles.loginButtonText}>Login</Text>
-        </TouchableOpacity>
+        <Animatable.View
+          animation="pulse"
+          iterationCount="infinite"
+          useNativeDriver
+          style={styles.loginButton}
+        >
+          <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
+            <Text style={styles.loginButtonText}>Login</Text>
+          </TouchableOpacity>
+        </Animatable.View>
 
         <View style={styles.footerContainer}>
           <TouchableOpacity>

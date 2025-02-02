@@ -5,16 +5,20 @@ import {
   TouchableOpacity,
   Text,
   StyleSheet,
+  Alert,
 } from "react-native";
-import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { DrawerContentScrollView } from "@react-navigation/drawer";
 import {
   IconStyle,
   Logout,
   LogoutButton,
   LogoutContainer,
 } from "../components/molecules/logoutButton/Styles";
-
 import { SimpleLineIcons } from "@expo/vector-icons";
+
+import api from "../api/api";
+import getEndPoint from "../endpoints/getEndpoint";
 
 const Separator = () => (
   <View
@@ -34,6 +38,42 @@ export default function DrawerContent({ navigation }) {
     { label: "About", screen: "About" },
   ];
 
+  const handleLogout = async () => {
+    Alert.alert(
+      "Confirm Logout",
+      "Are you sure you want to logout?",
+      [
+        {
+          text: "No",
+          style: "cancel",
+        },
+        {
+          text: "Yes",
+          onPress: async () => {
+            try {
+              await api.post(getEndPoint("LOGOUT"), {
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${await AsyncStorage.getItem("access")}`,
+                },
+              });
+
+              await AsyncStorage.removeItem("access");
+              await AsyncStorage.removeItem("refresh");
+              navigation.reset({
+                index: 0,
+                routes: [{ name: "LoginScreen" }],
+              });
+            } catch (error) {
+              console.error("Logout failed:", error);
+            }
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <DrawerContentScrollView>
@@ -41,11 +81,7 @@ export default function DrawerContent({ navigation }) {
           {drawerItems.map((item, index) => (
             <React.Fragment key={index}>
               <TouchableOpacity
-                onPress={() =>
-                  item?.screen
-                    ? navigation.navigate(item.screen)
-                    : item.onPress()
-                }
+                onPress={() => navigation.navigate(item.screen)}
                 style={{ paddingVertical: 10 }}
               >
                 <Text style={{ color: "#508C9B", fontSize: 16 }}>
@@ -56,7 +92,7 @@ export default function DrawerContent({ navigation }) {
             </React.Fragment>
           ))}
 
-          <LogoutButton onPress={() => navigation.navigate("LoginScreen")}>
+          <LogoutButton onPress={handleLogout}>
             <LogoutContainer>
               <SimpleLineIcons
                 name="logout"

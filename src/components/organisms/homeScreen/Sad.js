@@ -1,14 +1,25 @@
 import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
+import * as Animatable from "react-native-animatable";
+
+//Styles
 import { styles } from "./Styles";
 
-const Sad = ({navigation}) => {
+const Sad = ({ navigation }) => {
   return (
-    <View style={styles.sadContainer}>
-      <TouchableOpacity style={styles.sadButton} onPress={() => navigation.navigate("ChatScreen")}>
+    <Animatable.View
+      animation="pulse"
+      iterationCount="infinite"
+      useNativeDriver
+      style={styles.sadContainer}
+    >
+      <TouchableOpacity
+        style={styles.sadButton}
+        onPress={() => navigation.navigate("ChatScreen")}
+      >
         <Text style={styles.sadButtonText}>Sad Button</Text>
       </TouchableOpacity>
-    </View>
+    </Animatable.View>
   );
 };
 

@@ -6,8 +6,9 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Happy from "./Happy";
 import Sad from "./Sad";
+import AnimatedTyping from "../../molecules/animatedTyping/Index";
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = ({ navigation }) => {
   const [selectedOption, setSelectedOption] = useState("Sad");
   const dispatch = useDispatch();
 
@@ -28,6 +29,8 @@ const HomeScreen = ({navigation}) => {
         style={styles.logo}
       />
 
+      <AnimatedTyping />
+
       <View style={styles.tabContainer}>
         <TabButton
           source={require("../../../../assets/happy.png")}
@@ -43,8 +46,8 @@ const HomeScreen = ({navigation}) => {
         />
       </View>
 
-      {selectedOption == "Happy" && <Happy navigation={navigation}/>}
-      {selectedOption == "Sad" && <Sad navigation={navigation}/>}
+      {selectedOption == "Happy" && <Happy navigation={navigation} />}
+      {selectedOption == "Sad" && <Sad navigation={navigation} />}
     </View>
   );
 };

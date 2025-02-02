@@ -27,13 +27,14 @@ export const styles = StyleSheet.create({
   },
   
   loginButton: {
-    width: '100%',
+    width: '95%',
     height: width * 0.15,
     backgroundColor: '#042630',
     borderRadius: width * 0.05,
     justifyContent: 'center',
     alignItems: 'center',
     marginVertical: width * 0.03,
+    marginHorizontal: width * 0.02,
   },
   loginButtonText: {
     color: '#ffffff',
