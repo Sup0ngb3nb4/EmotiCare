@@ -8,12 +8,12 @@ const FirstPage = ({navigation}) => {
 
       <Text style={styles.logoName}>EmotiCare</Text>
 
-      <TouchableOpacity style={styles.signupContainer} onPress={()=>navigation.navigate('SignUp')}>
+      <TouchableOpacity style={styles.signupContainer} onPress={()=>navigation.navigate('Swiper')}>
         <Text style={styles.signupText}>Sign Up</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.loginContainer} onPress={()=>navigation.navigate('LoginScreen')}>
-        <Text style={styles.loginText}>Login</Text>
+         <Text>style={styles.loginText}Login</Text>
       </TouchableOpacity>
     </View>
   );

@@ -16,18 +16,18 @@ export default function DrawerNavigator({ navigation }) {
         initialRouteName="Home"
         screenOptions={{
           drawerStyle: {
-            backgroundColor: "#EEEEEE",
+            backgroundColor: "#F5F0CD",
             width: 250,
           },
           headerStyle: {
-            backgroundColor: "#FFFFFF",
+            backgroundColor: "#7B4019",
           },
           drawerActiveTintColor: "white",
           drawerInactiveTintColor: "white",
           headerTitleStyle: {
-            color: "#000000",
+            color: "#FFFFFF",
           },
-          headerTintColor: "#000000",
+          headerTintColor: "#FFFFFF",
         }}
         drawerContent={(props) => (
           <DrawerContent {...props} />

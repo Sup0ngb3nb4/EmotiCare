@@ -4,7 +4,7 @@ const { height, width } = Dimensions.get("window");
 
 export const Container = styled.View`
   flex: 1;
-  background-color: #f0f8ff;
+  background-color: #F5F0CD;
   padding: ${width * 0.05}px;
 `;
 
@@ -15,7 +15,7 @@ export const HeaderContainer = styled.View`
 export const Header = styled.Text`
   font-size: ${width * 0.07}px;
   font-weight: bold;
-  color: purple;
+  color: #7B4019;
   text-align: center;
 `;
 
@@ -41,7 +41,7 @@ export const SectionContainer = styled.View`
 export const SectionTitle = styled.Text`
   font-size: ${width * 0.05}px;
   font-weight: bold;
-  color: purple;
+  color: #7B4019;
   margin-bottom: ${width * 0.04}px;
   text-transform: uppercase;
 `;

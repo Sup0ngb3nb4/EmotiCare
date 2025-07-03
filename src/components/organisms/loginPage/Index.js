@@ -90,6 +90,7 @@ const LoginScreen = ({ navigation }) => {
         <Text style={styles.welcomeText}>Welcome to EmotiCare!</Text>
 
         <View style={styles.inputContainer}>
+          {" "}
           <CustomInput
             icon={() => <Fontisto name="email" size={20} color="#999" />}
             placeholder="Email"
@@ -101,7 +102,6 @@ const LoginScreen = ({ navigation }) => {
             onBlur={() => setFocusedInput(null)}
             isFocused={focusedInput === "email"}
           />
-
           <PasswordInput
             placeholder="Password"
             secureTextEntry={true}
@@ -113,7 +113,6 @@ const LoginScreen = ({ navigation }) => {
             isFocused={focusedInput === "Password"}
           />
         </View>
-
         <Animatable.View
           animation="pulse"
           iterationCount="infinite"

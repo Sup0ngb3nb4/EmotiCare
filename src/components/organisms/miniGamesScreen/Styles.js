@@ -1,35 +1,50 @@
 import { Dimensions, StyleSheet } from "react-native";
 
-const { height, width } = Dimensions.get("window");
+const { width } = Dimensions.get("window");
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#FFF8E1",
+    paddingTop: 60,
+    paddingHorizontal: 16,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: "bold",
+    color: "#7B4019",
+    textAlign: "center",
+    marginBottom: 30,
+  },
+  grid: {
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "center",
-    paddingTop: width * 0.1 
+    justifyContent: "space-between",
   },
-  gameContainer:{
-    height: width * 0.3,
-    width: width * 0.3,
-    margin: width * 0.05,
-    borderRadius: width * 0.03,
-    // borderWidth: width * 0.01,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 2,
-      height: 7,
-    },
-    shadowOpacity: 0.41,
-    shadowRadius: 4.01,
-    elevation: 1.5,
+  gameContainer: {
+    width: width * 0.42,
+    aspectRatio: 1,
+    borderRadius: 20,
+    backgroundColor: "#FFEEA9",
+    marginBottom: 20,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    elevation: 5,
+    shadowColor: "#000",
+    shadowOffset: { width: 2, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
   },
-  gameIcon:{
-    height: width * 0.28,
-    width: width * 0.28,
-    borderRadius: width * 0.04,
-  }
+  gameIcon: {
+    width: "80%",
+    height: "60%",
+    resizeMode: "contain",
+    borderRadius: 15,
+  },
+  label: {
+    marginTop: 10,
+    fontWeight: "600",
+    color: "#7B4019",
+    fontSize: 16,
+  },
 });

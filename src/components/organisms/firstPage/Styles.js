@@ -5,21 +5,21 @@ const { width, height } = Dimensions.get("window");
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#86b9b0",
+    backgroundColor: "#FFBF78",
     alignItems: "center",
     justifyContent: "flex-end",
     padding: width * 0.1,
   },
   logoName: {
     marginBottom: height * 0.3,
-    color: "#041421",
+    color: "#3F2827",
     fontWeight: "bold",
     fontSize: width * 0.13,
   },
   signupContainer: {
     width: "100%",
     height: width * 0.15,
-    backgroundColor: "#041421",
+    backgroundColor: "#3F2827",
     borderRadius: width * 0.05,
     justifyContent: "center",
     alignItems: "center",

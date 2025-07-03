@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     fontStyle: "italic",
+    color: "#7B4019"
   },
   cursor: {
     fontSize: 18,

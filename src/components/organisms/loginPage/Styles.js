@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
   welcomeText: {
     fontSize: width * 0.07,
     fontWeight: 'bold',
-    color: '#333333',
+    color: '#3F2827',
     marginBottom: height * 0.05,
   },
   inputContainer: {
@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
   loginButton: {
     width: '96%',
     height: width * 0.15,
-    backgroundColor: '#042630',
+    backgroundColor: '#3F2827',
     borderRadius: width * 0.05,
     justifyContent: 'center',
     alignItems: 'center',
@@ -46,7 +46,7 @@ export const styles = StyleSheet.create({
     marginTop: width * 0.08
   },
   forgotPasswordText: {
-    color: '#86b9b0',
+    color: '#FF7D29',
     fontSize: width * 0.037,
     marginBottom: 20,
   },
@@ -55,7 +55,7 @@ export const styles = StyleSheet.create({
     fontSize: width * 0.037,
   },
   accountLink: {
-    color: '#86b9b0',
+    color: '#FF7D29',
     textDecorationLine: 'underline',
     fontSize: width * 0.037,
   },

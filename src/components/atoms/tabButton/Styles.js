@@ -8,7 +8,7 @@ export const StyledTabButton = styled.TouchableOpacity`
   alignItems: center;
   paddingVertical: ${height * 0.015}px;
   borderBottomWidth: 2px;
-  borderBottomColor: ${(props) => props.active? "#4c7273" : "transparent"};
+  borderBottomColor: ${(props) => props.active? "#7B4019" : "transparent"};
 `;
 
 export const TabItemImage = styled.Image`
@@ -18,7 +18,7 @@ export const TabItemImage = styled.Image`
 `;
 
 export const TabItemText = styled.Text`
-  color: ${(props) => (props.active ? "#001F54" : "#999")};
+  color: ${(props) => (props.active ? "#7B4019" : "#999")};
   text-align: center;
   font-size: ${width * 0.04}px;
   font-weight: ${(props) => (props.active ? "600" : "400")};

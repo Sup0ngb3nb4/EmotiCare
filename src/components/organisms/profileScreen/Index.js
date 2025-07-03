@@ -45,13 +45,11 @@ const ProfileScreen = () => {
 
         if (response.status === 401) {
           token = await refreshAccessToken();
-          const retryResponse = await api.get(getEndPoint("PROFILE") ,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
+          const retryResponse = await api.get(getEndPoint("PROFILE"), {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
 
           if (retryResponse.ok) {
             const data = await retryResponse.json();
@@ -61,11 +59,8 @@ const ProfileScreen = () => {
               "Failed to fetch profile data after refreshing token."
             );
           }
-        } else if (response.ok) {
-          const data = await response.json();
-          setProfileData(data);
         } else {
-          throw new Error("Failed to fetch profile data.");
+          setProfileData(response.data);
         }
       } catch (err) {
         console.error(
@@ -91,16 +86,18 @@ const ProfileScreen = () => {
   }
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView showsVerticalScrollIndicator={false} style = {{  backgroundColor: "#FFFFFF"}}>
       <ProfilePictureContainer>
         <ProfileBackground />
         <ProfilePicture
-          source={
-            image
-              ? { uri: image }
-              : require("../../../../assets/background.jpeg")
-          }
-        />
+    source={
+      profileData.gender === "Male"
+        ? require("../../../../assets/male.png")
+        : profileData.gender === "Female"
+        ? require("../../../../assets/female.png")
+        : require("../../../../assets/anonymous.png") // optional fallback
+    }
+  />
       </ProfilePictureContainer>
 
       <ProfileDetailsContainer>
@@ -118,12 +115,12 @@ const ProfileScreen = () => {
           </ValueContainer>
         </ProfileField>
 
-        <ProfileField>
+        {/* <ProfileField>
           <Label>Password</Label>
           <ValueContainer>
             <Value>{profileData.password}</Value>
           </ValueContainer>
-        </ProfileField>
+        </ProfileField> */}
 
         <ProfileField>
           <Label>Gender</Label>

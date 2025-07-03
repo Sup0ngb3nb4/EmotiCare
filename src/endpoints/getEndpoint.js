@@ -1,4 +1,12 @@
-import { LOGIN_ENDPOINT, LOGOUT_ENDPOINT, SIGNUP_ENDPOINT, PROFILE_ENDPOINT} from "./endpoint";
+import {
+  LOGIN_ENDPOINT,
+  LOGOUT_ENDPOINT,
+  SIGNUP_ENDPOINT,
+  PROFILE_ENDPOINT,
+  CHAT_ENDPOINT,
+  CHAT_HISTORY_ENDPOINT,
+  REFRESH_ENDPOINT,
+} from "./endpoint";
 
 export const getEndPoint = (endpoint) => {
   switch (endpoint) {
@@ -16,6 +24,12 @@ export const getEndPoint = (endpoint) => {
 
     case "PROFILE":
       return PROFILE_ENDPOINT;
+    
+    case "CHAT":
+      return CHAT_ENDPOINT;
+
+    case "CHAT_HISTORY":
+      return CHAT_HISTORY_ENDPOINT;
 
     default:
       return null;

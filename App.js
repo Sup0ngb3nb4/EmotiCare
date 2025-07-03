@@ -16,7 +16,12 @@ import AboutScreen from "./src/components/organisms/aboutScreen/Index";
 import DrawerNavigator from "./src/navigations/DrawerNavigator";
 import ChatScreen from "./src/components/organisms/chatScreen/Index";
 import MiniGamesScreen from "./src/components/organisms/miniGamesScreen/Index";
+import TicTacToe from "./src/components/organisms/miniGamesScreen/miniGames/tictactoe/Index";
 import Toast from "react-native-toast-message";
+import Swiper from "./src/components/organisms/introScreen/Index";
+import FriendTicTacToe from "./src/components/organisms/miniGamesScreen/miniGames/tictactoe/FriendTicTacToe";
+import SingleTicTacToe from "./src/components/organisms/miniGamesScreen/miniGames/tictactoe/SingleTicTacToe";
+import RockPaperScissorScreen from "./src/components/organisms/miniGamesScreen/miniGames/rockpaperscissor/Index";
 
 const Stack = createStackNavigator();
 
@@ -25,8 +30,17 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="FirstPage"
-          screenOptions={{ headerShown: false }}
+          initialRouteName="Login"
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: "#7B4019",
+            },
+            headerTintColor: "#ffffff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+            headerShown: false,
+          }}
         >
           <Stack.Screen
             name="FirstPage"
@@ -44,6 +58,11 @@ export default function App() {
             options={{ title: "Login Screen" }}
           />
           <Stack.Screen
+            name="Swiper"
+            component={Swiper}
+            options={{ title: "Swiper" }}
+          />
+          <Stack.Screen
             name="HomeScreen"
             component={HomeScreen}
             options={{ title: "Home" }}
@@ -56,13 +75,34 @@ export default function App() {
           <Stack.Screen
             name="MiniGamesScreen"
             component={MiniGamesScreen}
-            options={{ title: "Mini Games", headerShown: true}}
+            options={{ title: "Mini Games", headerShown: true }}
           />
+          <Stack.Screen
+            name="TicTacToe"
+            component={TicTacToe}
+            options={{ title: "Tic Tac Toe", headerShown: true }}
+          />
+          <Stack.Screen
+            name="FriendTicTacToe"
+            component={FriendTicTacToe}
+            options={{ title: "Friend Tic Tac Toe", headerShown: true }}
+          />
+          <Stack.Screen
+            name="SingleTicTacToe"
+            component={SingleTicTacToe}
+            options={{ title: "Single Tic Tac Toe", headerShown: true }}
+          />
+          <Stack.Screen
+            name="RockPaperScissor"
+            component={RockPaperScissorScreen}
+            options={{ title: "Rock Paper Scissor", headerShown: true }}
+          />
+
           <Stack.Screen name="Sad" component={Sad} options={{ title: "Sad" }} />
           <Stack.Screen
             name="ChatScreen"
             component={ChatScreen}
-            options={{ title: "Chat", headerShown: true}}
+            options={{ title: "Chat", headerShown: true }}
           />
           <Stack.Screen
             name="ProfileScreen"
@@ -85,7 +125,7 @@ export default function App() {
             options={{ title: "Drawer Navigator" }}
           />
         </Stack.Navigator>
-        <Toast/>
+        <Toast />
       </NavigationContainer>
     </Provider>
   );

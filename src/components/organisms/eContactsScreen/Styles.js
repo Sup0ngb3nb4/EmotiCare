@@ -5,7 +5,7 @@ const { height, width } = Dimensions.get("window");
 
 export const Container = styled.View`
   flex: 1;
-  background-color: #f5f5f5;
+  background-color: #F5F0CD;
   padding: ${width * 0.05}px;
 `;
 
@@ -20,7 +20,7 @@ export const CategoryContainer = styled.View`
 export const CategoryTitle = styled.Text`
   font-size: ${width * 0.045}px;
   font-weight: bold;
-  color: purple;
+  color: #7B4019;
   margin-bottom: ${width * 0.02}px;
 `;
 
@@ -40,6 +40,6 @@ export const OrganizationText = styled.Text`
 
 export const ContactNumber = styled.Text`
   font-size: ${width * 0.04}px;
-  color: purple;
+  color: #FF4F0F;
   text-decoration: underline;
 `;

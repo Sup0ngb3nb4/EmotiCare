@@ -1,8 +1,8 @@
+import getEndPoint from "../endpoints/getEndpoint";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { refreshToken } from "./authApi";
 
-// Function to store access and refresh tokens in AsyncStorage
+// Save tokens
 export const storeTokens = async (access, refresh) => {
   try {
     await AsyncStorage.setItem("AccessToken", access);
@@ -13,7 +13,7 @@ export const storeTokens = async (access, refresh) => {
   }
 };
 
-// Function to retrieve access token from AsyncStorage
+// Get access token
 export const getAccessToken = async () => {
   try {
     const access = await AsyncStorage.getItem("AccessToken");
@@ -25,7 +25,29 @@ export const getAccessToken = async () => {
   }
 };
 
-// Function to refresh access token using refresh token
+// Refresh token API call
+const refreshToken = async (refresh) => {
+  try {
+    const response = await fetch(getEndPoint("REFRESH"), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ refresh }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok || !data.access) {
+      throw new Error("Invalid refresh response");
+    }
+
+    return data.access;
+  } catch (error) {
+    console.error("Failed to refresh token:", error);
+    throw error;
+  }
+};
+
+// Refresh access token
 export const refreshAccessToken = async () => {
   try {
     const refresh = await AsyncStorage.getItem("RefreshToken");
@@ -34,7 +56,7 @@ export const refreshAccessToken = async () => {
     await AsyncStorage.removeItem("AccessToken");
     console.log("Refresh Token:", refresh);
 
-    const newAccessToken = await refreshToken(refresh); // Use the refresh function
+    const newAccessToken = await refreshToken(refresh);
     await AsyncStorage.setItem("AccessToken", newAccessToken);
     return newAccessToken;
   } catch (error) {
@@ -43,39 +65,34 @@ export const refreshAccessToken = async () => {
   }
 };
 
-// Function to check if access token is expired
+// Dummy expiry check
 export const checkAccessTokenExpiry = async () => {
   try {
     const access = await getAccessToken();
-    if (!access) {
-      return true; // Access token not found, considered expired
-    }
-    // Add logic to check if access token is expired based on expiry timestamp
-    // Return true if expired, false otherwise
+    if (!access) return true;
     return false;
   } catch (error) {
     console.error("Error checking access token expiry:", error);
-    return true; // Assume token is expired in case of error
+    return true;
   }
 };
 
-// Function to handle access token expiration and refreshing
+// Handle token expiration
 export const handleAccessToken = async () => {
   try {
     const isAccessTokenExpired = await checkAccessTokenExpiry();
     if (isAccessTokenExpired) {
       const newAccessToken = await refreshAccessToken();
       if (newAccessToken) {
-        await storeTokens(response.access, response.refresh);
-        return true; // Successfully refreshed access token
+        return true;
       } else {
-        // Unable to refresh access token, logout user
         await AsyncStorage.removeItem("AccessToken");
         await AsyncStorage.removeItem("RefreshToken");
         Alert.alert("Session Expired", "Please login again");
         return false;
       }
     }
+    return true;
   } catch (error) {
     console.error("Error handling access token:", error);
     return false;

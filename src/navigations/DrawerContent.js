@@ -24,7 +24,7 @@ const Separator = () => (
   <View
     style={{
       marginVertical: 8,
-      borderBottomColor: "#737373",
+      borderBottomColor: "#7B4019",
       borderBottomWidth: StyleSheet.hairlineWidth,
     }}
   />
@@ -84,7 +84,7 @@ export default function DrawerContent({ navigation }) {
                 onPress={() => navigation.navigate(item.screen)}
                 style={{ paddingVertical: 10 }}
               >
-                <Text style={{ color: "#508C9B", fontSize: 16 }}>
+                <Text style={{ color: "#7B4019", fontSize: 16 }}>
                   {item.label}
                 </Text>
               </TouchableOpacity>
